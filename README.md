@@ -41,7 +41,12 @@ zinit wait lucid light-mode for atinit'VOLTA_HOME="~/.local/volta"' 0xTadash1/zs
 
 - [ ] better support for zinit
 - [ ] test with other plugin manager
+  - [ ] zplug
+  - [ ] antigen
+  - [ ] zgen
 - [ ] better completions install process
+- [ ] post installation hook..?
+  - node, npm, yarn, or npm packages installation
 
 ## LICENSE
 
