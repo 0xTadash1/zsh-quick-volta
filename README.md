@@ -34,7 +34,7 @@ zinit light-mode for 0xTadash1/zsh-quick-volta
 or When installing and using `volta` on `~/.local/volta` with Zinit's Turbo-mode:
 
 ```shell
-zinit wait lucid light-mode for atinit'VOLTA_HOME="~/.local/volta"' 0xTadash1/zsh-quick-volta
+zinit wait lucid light-mode for atinit'VOLTA_HOME="${HOME}/.local/volta"' 0xTadash1/zsh-quick-volta
 ```
 
 ## TODO
