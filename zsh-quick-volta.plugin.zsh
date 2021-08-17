@@ -13,4 +13,9 @@ fi
 
 if [[ ! -s "$(dirname ${0})/_volta" ]]; then
     volta completions zsh -f -o "$(dirname ${0})/_volta"
+
+    # if zinit is used as plugin manager
+    if [[ $(command -v zinit) ]]; then
+        zinit creinstall 0xTadash1/zsh-quick-volta
+    fi
 fi
