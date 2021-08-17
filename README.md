@@ -14,6 +14,10 @@ Install Volta, and enable environment variables and completion!
 - Automatic Activation
   - If `$VOLTA_HOME` is already set by you, respect it. By default, `~/.volta` will be used. 
 
+## Usage
+
+Just Install! via Your favorite plugin manager
+
 ## Required
 
 - `curl`
@@ -27,7 +31,8 @@ Install Volta, and enable environment variables and completion!
 zinit light-mode for 0xTadash1/zsh-quick-volta
 ```
 
-or You install `volta` to `~/.local/volta` with Zinit's Turbo-mode:
+or When installing and using `volta` on `~/.local/volta` with Zinit's Turbo-mode:
+
 ```shell
 zinit wait lucid light-mode for atinit'VOLTA_HOME="~/.local/volta"' 0xTadash1/zsh-quick-volta
 ```
@@ -45,5 +50,6 @@ zgen load "0xTadash1/zsh-quick-volta"
 ```
 
 ## LICENSE
-This repository is licensed under a MIT license.
+
+This repository is licensed under a [MIT license](https://github.com/0xTadash1/zsh-quick-volta/blob/main/LICENSE).
 
