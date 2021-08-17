@@ -37,18 +37,6 @@ or When installing and using `volta` on `~/.local/volta` with Zinit's Turbo-mode
 zinit wait lucid light-mode for atinit'VOLTA_HOME="~/.local/volta"' 0xTadash1/zsh-quick-volta
 ```
 
-### Zplug
-
-```shell
-zplug "0xTadash1/zsh-quick-volta"
-```
-
-### Zgen
-
-```shell
-zgen load "0xTadash1/zsh-quick-volta"
-```
-
 ## LICENSE
 
 This repository is licensed under a [MIT license](https://github.com/0xTadash1/zsh-quick-volta/blob/main/LICENSE).
