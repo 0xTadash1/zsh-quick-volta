@@ -11,6 +11,6 @@ if [[ ! $(command -v volta) ]]; then
     fi
 fi
 
-if [[ ! -f "$(dirname ${0})/_volta" ]]; then
+if [[ ! -s "$(dirname ${0})/_volta" ]]; then
     volta completions zsh -f -o "$(dirname ${0})/_volta"
 fi
