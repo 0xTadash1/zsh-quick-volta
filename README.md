@@ -10,7 +10,7 @@ Install Volta, and enable environment variables and completion!
 
 - Automatic Installation if not already installed
 - Automatic Generation of Completion Files 
-  - Run `volta completions zsh` if `_volta` exists and has size greater than zero
+  - Run `volta completions zsh` if `_volta` doesn't exists or doesn't has size greater than zero
 - Automatic Activation
   - If `$VOLTA_HOME` is already set by you, respect it. By default, `~/.volta` will be used. 
 
