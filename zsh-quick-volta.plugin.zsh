@@ -9,8 +9,8 @@ ${package}.main() {
     
     case "${ZQVOLTA[VERSION_CHECK]}" in
     notice)
-        ${package}.versionOk || \
-            echo "You can \`${package}.Install\` to install '${ZQVOLTA[VERSION]}'." ;;
+        ${package}.versionOk \
+            || echo "You can \`${package}.Install\` to install '${ZQVOLTA[VERSION]}'." ;;
     
     question)
         ${package}.versionOk || {
@@ -50,7 +50,7 @@ ${package}.init() {
 
     # Instead of `volta setup`
     export VOLTA_HOME="${VOLTA_HOME:-"${HOME}/.volta"}"
-    export path=("${VOLTA_HOME}/bin"(N-/) ${path})
+    export path=("${VOLTA_HOME}/bin" ${path})
 
     if ! type curl >& /dev/null; then
         echo '==> zsh-quick-volta requires `curl` to check for the latest version,' >&2
@@ -74,7 +74,8 @@ ${package}.Install() {
 
         # `--force`: overwrite
         volta completions zsh --force --output "${ZQVOLTA[FPATH]}/_volta" && {
-            [[ -z "${fpath[(r)${ZQVOLTA[FPATH]}]}" ]] && export fpath+=( "${ZQVOLTA[FPATH]}" )
+            [[ -z "${fpath[(r)${ZQVOLTA[FPATH]}]}" && "${ZQVOLTA[FPATH]}" != '.' ]] \
+                && export fpath+=( "${ZQVOLTA[FPATH]}" )
 
             echo '==> Successfully Installed all!'
             echo
