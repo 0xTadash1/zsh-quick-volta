@@ -75,7 +75,7 @@ ${package}.Install() {
         # `--force`: overwrite
         volta completions zsh --force --output "${ZQVOLTA[FPATH]}/_volta" && {
             [[ -z "${fpath[(r)${ZQVOLTA[FPATH]}]}" && "${ZQVOLTA[FPATH]}" != '.' ]] \
-                && export fpath+=( "${ZQVOLTA[FPATH]}" )
+                && export fpath+=( "${ZQVOLTA[FPATH]}" $fpath )
 
             echo '==> Successfully Installed all!'
             echo
