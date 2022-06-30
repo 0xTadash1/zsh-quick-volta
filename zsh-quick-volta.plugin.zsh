@@ -14,7 +14,7 @@ ${package}.main() {
     
     question)
         ${package}.versionOk || {
-            echo -n '==> Update now? [y/N]: '
+            echo -n '==> Install now? [y/N]: '
             read -q && ${package}.Install
         } ;;
     
