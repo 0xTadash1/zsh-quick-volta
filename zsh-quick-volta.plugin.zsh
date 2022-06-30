@@ -72,10 +72,12 @@ ${package}.Install() {
         
         echo '==> Next, install volta completions. [2/2]'
 
+        local comp_dir="${ZQVOLTA[FPATH]}"
+        [[ "$comp_dir" = '.' ]] && comp_dir="${packageRoot}"
         # `--force`: overwrite
-        volta completions zsh --force --output "${ZQVOLTA[FPATH]}/_volta" && {
-            [[ -z "${fpath[(r)${ZQVOLTA[FPATH]}]}" && "${ZQVOLTA[FPATH]}" != '.' ]] \
-                && export fpath=( "${ZQVOLTA[FPATH]}" $fpath )
+        volta completions zsh --force --output "$comp_dir/_volta" && {
+            [[ -z "${fpath[(r)$comp_dir]}" && "$comp_dir" != '.' ]] \
+                && export fpath=( "$comp_dir" $fpath )
 
             echo '==> Successfully Installed all!'
             echo
@@ -139,10 +141,13 @@ ${package}.UninstallVolta() {
     : ${ZQVOLTA[FPATH]:="${packageRoot}/functions"}
     export VOLTA_HOME="${VOLTA_HOME:-"${HOME}/.volta"}"
 
-    echo -n '==> Uninstall Volta? (`rm -rfv '"${VOLTA_HOME}" "${ZQVOLTA[FPATH]}/_volta"'`) [y/N]: '
+    local comp_dir="${ZQVOLTA[FPATH]}"
+    [[ "$comp_dir" = '.' ]] && comp_dir="${packageRoot}"
+
+    echo -n '==> Uninstall Volta? (`rm -rfv '"${VOLTA_HOME}" "${comp_dir}/_volta"'`) [y/N]: '
     if read -q; then
         echo
-        command rm -rfv "$VOLTA_HOME" "${ZQVOLTA[FPATH]}/_volta" && {
+        command rm -rfv "$VOLTA_HOME" "${comp_dir}/_volta" && {
             echo '==> Successfully Uninstalled.'
         } || {
             echo '==> Failed to Uninstall.' 1>&2
