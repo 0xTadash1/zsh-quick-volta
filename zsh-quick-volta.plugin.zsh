@@ -120,14 +120,14 @@ ${package}.versionOk() {
         local latest_v=$(( ${raw_latest_v[1]} * 1000000 + ${(j/./)raw_latest_v[2,3]} * 1000 ))
 
         # Verify
-        if (( "$local_v" < "$latest_v" )); then
+        if (( $local_v < $latest_v )); then
             echo '==> Updates are there.' "Local: ${local_v}, Latest: ${latest_v}" 1>&2
             return 1
         fi
 
     else
         # Verify
-        if (( "$local_v" != "${ZQVOLTA[VERSION]}" )); then
+        if (( $local_v != ${ZQVOLTA[VERSION]} )); then
             echo '==> Version mismatch.' "Local: ${local_v}, Request: ${ZQVOLTA[VERSION]}" 1>&2
             return 1
         fi
