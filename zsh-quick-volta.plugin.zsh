@@ -161,7 +161,7 @@ ${package}.UninstallVolta() {
 ${package}.deinit() {
     local endstatus="$?"
     local glob="$1"
-    unfunction "${package}.deinit" ${(Mk)functions:#"${~glob}"}
+    unfunction "${package}.deinit" ${(Mk)functions:#${~glob}}
     unset package packageRoot
     return "$endstatus"
 }
