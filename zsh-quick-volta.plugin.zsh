@@ -50,7 +50,7 @@ ${package}.init() {
 
     # Instead of `volta setup`
     export VOLTA_HOME="${VOLTA_HOME:-"${HOME}/.volta"}"
-    export path=("${VOLTA_HOME}/bin" ${path})
+    export path=( "${VOLTA_HOME}/bin" $path )
 
     if ! type curl >& /dev/null; then
         echo '==> zsh-quick-volta requires `curl` to check for the latest version,' >&2
@@ -85,7 +85,7 @@ ${package}.Install() {
         } || {
             echo '==> Failed to install the completions.' >&2
 
-            command rm -rfv "${VOLTA_HOME}"
+            command rm -rfv "$VOLTA_HOME"
 
             # To goto `echo '==> Filed to Install.' >&2` block.
             # Don't use `return` which escape whole `curl ...` block.
@@ -101,7 +101,7 @@ ${package}.versionOk() {
     # Get local version
     if type volta >& /dev/null; then
         local -a raw_local_v=( ${(s/./)$(volta -v)} )
-        local local_v=$(( ${raw_local_v[1]} * 1000000 + ${(j/./)raw_local_v[2,3]} * 1000 ))
+        local local_v="$(( ${raw_local_v[1]} * 1000000 + ${(j/./)raw_local_v[2,3]} * 1000 ))"
     else
         echo '==> Volta has not been installed.' 1>&2
         return 1
@@ -115,9 +115,9 @@ ${package}.versionOk() {
         local url='https://github.com/volta-cli/volta/releases/latest'
         local -a raw_latest_v=(
             # `##*/v`: https://github.com/**/v1.0.7 -> 1.0.7
-            ${${(s/./)$(curl -sw '%{redirect_url}' "$url")##*/v}:?"Connection failed: $url"}
+            ${${(s/./)$(curl -sw '%{redirect_url}' "$url")##*/v}:?"Connection failed: ${url}"}
         )
-        local latest_v=$(( ${raw_latest_v[1]} * 1000000 + ${(j/./)raw_latest_v[2,3]} * 1000 ))
+        local latest_v="$(( ${raw_latest_v[1]} * 1000000 + ${(j/./)raw_latest_v[2,3]} * 1000 ))"
 
         # Verify
         if (( $local_v < $latest_v )); then
@@ -137,7 +137,6 @@ ${package}.versionOk() {
 ${package}.UninstallVolta() {
     typeset -Ax ZQVOLTA
     : ${ZQVOLTA[FPATH]:="${packageRoot}/functions"}
-    : ${VOLTA_HOME:="${HOME}/.volta"}
     export VOLTA_HOME="${VOLTA_HOME:-"${HOME}/.volta"}"
 
     echo -n '==> Uninstall Volta? (`rm -rfv '"${VOLTA_HOME}" "${ZQVOLTA[FPATH]}/_volta"'`) [y/N]: '
@@ -155,11 +154,11 @@ ${package}.UninstallVolta() {
 }
 
 ${package}.deinit() {
-    local endstatus=$?
+    local endstatus="$?"
     local glob="$1"
     unfunction "${package}.deinit" ${(Mk)functions:#"${~glob}"}
     unset package packageRoot
-    return $endstatus
+    return "$endstatus"
 }
 
 
