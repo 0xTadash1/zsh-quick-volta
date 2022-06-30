@@ -101,7 +101,7 @@ ${package}.versionOk() {
     # Get local version
     if type volta >& /dev/null; then
         local -a raw_local_v=( ${(s/./)$(volta -v)} )
-        local -a local_v=$(( ${raw_local_v[1]} * 1000000 + ${(j/./)raw_local_v[2,3]} * 1000 ))
+        local local_v=$(( ${raw_local_v[1]} * 1000000 + ${(j/./)raw_local_v[2,3]} * 1000 ))
     else
         echo '==> Volta has not been installed.' 1>&2
         return 1
@@ -117,7 +117,7 @@ ${package}.versionOk() {
             # `##*/v`: https://github.com/**/v1.0.7 -> 1.0.7
             ${${(s/./)$(curl -sw '%{redirect_url}' "$url")##*/v}:?"Connection failed: $url"}
         )
-        local -a latest_v=$(( ${raw_latest_v[1]} * 1000000 + ${(j/./)raw_latest_v[2,3]} * 1000 ))
+        local latest_v=$(( ${raw_latest_v[1]} * 1000000 + ${(j/./)raw_latest_v[2,3]} * 1000 ))
 
         # Verify
         if (( "$local_v" < "$latest_v" )); then
