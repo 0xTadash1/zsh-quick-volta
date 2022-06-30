@@ -15,7 +15,7 @@ ${package}.main() {
     question)
         ${package}.versionOk || {
             echo -n '==> Install now? [y/N]: '
-            read -q && ${package}.Install
+            read -q && { echo; ${package}.Install }
         } ;;
     
     immediate)
@@ -32,14 +32,14 @@ ${package}.main() {
 ${package}.init() {
     typeset -Ax ZQVOLTA
 
-    # Varidation
+    # Validation
     local -A allowed_regex=(
         [VERSION]='^(latest|([1-9]+[0-9]*|0)(\.([1-9]+[0-9]*|0)){2})$'
         [VERSION_CHECK]='^(notice|question|immediate|background|nocheck)$'
     )
     local key regex
     for key regex in ${(kv)allowed_regex}; do
-        [[ -n "${ZQVOLTA[$key]}" && "${ZQVOLTA[$key]}" =~ "$regex" ]] || {
+        [[ -n "${ZQVOLTA[$key]}" && ! "${ZQVOLTA[$key]}" =~ "$regex" ]] && {
             echo "==> \${ZQVOLTA[$key]} is invalid. Fallback to default." 1>&2
         }
     done
@@ -142,6 +142,7 @@ ${package}.UninstallVolta() {
 
     echo -n '==> Uninstall Volta? (`rm -rfv '"${VOLTA_HOME}" "${ZQVOLTA[FPATH]}/_volta"'`) [y/N]: '
     if read -q; then
+        echo
         command rm -rfv "$VOLTA_HOME" "${ZQVOLTA[FPATH]}/_volta" && {
             echo '==> Successfully Uninstalled.'
         } || {
