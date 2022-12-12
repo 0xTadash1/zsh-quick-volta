@@ -6,24 +6,24 @@ typeset packageRoot="${${(%):-%x}:A:h}"
 ${package}.main() {
     # Export variables and check for `curl` existence
     ${package}.init || return 1
-    
+
     case "${ZQVOLTA[VERSION_CHECK]}" in
     notice)
         ${package}.versionOk \
             || echo "You can \`${package}.Install\` to install '${ZQVOLTA[VERSION]}'." ;;
-    
+
     question)
         ${package}.versionOk || {
             echo -n '==> Install now? [y/N]: '
             read -q && { echo; ${package}.Install }
         } ;;
-    
+
     immediate)
         ${package}.versionOk || ${package}.Install ;;
-    
+
     background)
         ( { ${package}.versionOk || ${package}.Install } > /dev/null & ) ;;
-    
+
     nocheck)
         ;;
     esac
@@ -69,7 +69,7 @@ ${package}.Install() {
 
     # Download and Run the install script
     curl -fsS 'https://get.volta.sh' | bash -s -- --skip-setup --version "${ZQVOLTA[VERSION]}" && {
-        
+
         echo '==> Next, install volta completions. [2/2]'
 
         local comp_dir="${ZQVOLTA[FPATH]}"
@@ -83,7 +83,7 @@ ${package}.Install() {
             echo
             echo '==> You don'\''t have to `volta setup` to set environment variables.'
             echo '    These are done by loading this plugin. So your dotfiles are kept clean :)'
-            
+
         } || {
             echo '==> Failed to install the completions.' >&2
 
